@@ -1,9 +1,9 @@
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
+import { NestFactory } from '@nestjs/core'
+import { AppModule } from './app.module'
+import { PORT } from './config'
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  console.log('API Server listening on port 3000');
-  await app.listen(3000);
+	const app = await NestFactory.create(AppModule)
+	await app.listen(PORT, () => console.log(`API_BACKEND listening on port ${PORT}`))
 }
-bootstrap();
+bootstrap()
