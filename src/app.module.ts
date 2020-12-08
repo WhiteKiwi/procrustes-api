@@ -4,7 +4,7 @@ import { AppService } from './app.service'
 
 import { ConfigModule } from '@nestjs/config';
 import Joi from '@hapi/joi';
-import configuration from './config';
+import configuration, { DEFAULT_PORT } from './config';
 import { ENVIRONMENT } from './utils/constants'
 
 @Module({
@@ -17,7 +17,7 @@ import { ENVIRONMENT } from './utils/constants'
 				ENVIRONMENT: Joi.string()
 					.valid(...Object.keys(ENVIRONMENT))
 					.default(ENVIRONMENT.DEVELOPMENT),
-				PORT: Joi.number().default(3001),
+				PORT: Joi.number().default(DEFAULT_PORT),
 			}),
 		}),
 	],
