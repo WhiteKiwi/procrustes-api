@@ -27,7 +27,6 @@ jobs:
       - name: create env file
         env:
           ENVIORNMENT_VARIABLES: ${{ secrets.ENVIORNMENT_VARIABLES }}
-        shell: bash
         run: |
           echo "$ENVIORNMENT_VARIABLES" > .env
       - name: Test
