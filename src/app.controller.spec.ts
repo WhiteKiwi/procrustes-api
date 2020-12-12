@@ -2,9 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
 
-import { ConfigModule } from '@nestjs/config'
-import configuration from './config/configuration'
-import validationSchema from './config/validation-schema'
+import GetConfigModule from './config'
 
 describe('AppController', () => {
 	let appController: AppController
@@ -12,14 +10,7 @@ describe('AppController', () => {
 
 	beforeEach(async () => {
 		const app: TestingModule = await Test.createTestingModule({
-			imports: [
-				ConfigModule.forRoot({
-					isGlobal: true,
-					envFilePath: 'test/.env',
-					load: [configuration],
-					validationSchema,
-				}),
-			],
+			imports: [GetConfigModule({ isTest: true })],
 			controllers: [AppController],
 			providers: [AppService],
 		}).compile()

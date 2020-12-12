@@ -5,23 +5,14 @@ import request from 'supertest'
 import { AppService } from '../../src/app.service'
 import { AppController } from '../../src/app.controller'
 
-import { ConfigModule } from '@nestjs/config'
-import configuration from '../../src/config/configuration'
-import validationSchema from '../../src/config/validation-schema'
+import GetConfigModule from '../../src/config'
 
 describe('AppController (e2e)', () => {
 	let app: INestApplication
 
 	beforeEach(async () => {
 		const moduleFixture: TestingModule = await Test.createTestingModule({
-			imports: [
-				ConfigModule.forRoot({
-					isGlobal: true,
-					envFilePath: 'test/.env',
-					load: [configuration],
-					validationSchema,
-				}),
-			],
+			imports: [GetConfigModule({ isTest: true })],
 			controllers: [AppController],
 			providers: [AppService],
 		}).compile()
